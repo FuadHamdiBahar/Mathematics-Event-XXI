@@ -1,0 +1,449 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Mathematics Event XXI</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Moderna - v2.2.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-transparent">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="index.html"><span>Mathematics Event XXI</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li class=""><a href="{% url 'home' %}">Home</a></li>
+
+          {% if user.is_superuser %}
+          <li class=""><a href="{% url 'data:home'  %}">Data</a></li>
+          {% endif %}
+
+
+          {% if user.is_authenticated %}
+          <li class=""><a href="{% url 'dashboards:index' user.id %}">Dashboard</a></li>
+          <li class=""><a href="{% url 'participants:logout' %}">Logout</a></li>
+
+          {% else %}
+          <li class=""><a href="{% url 'participants:login' %}">Login</a></li>
+          <li class="drop-down"><a href="">Register</a>
+            <ul>
+              <li><a href="{% url 'institutions:create' %}">Institusi</a></li>
+              <li><a href="{% url 'participants:create' %}">Peserta</a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Mathematic Event XXI</span></h2>
+          <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut
+            et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse
+            doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+          <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut
+            et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse
+            doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+          <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut
+            et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse
+            doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section class="services">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+            <div class="icon-box icon-box-pink">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title"><a href="">Registrasi Sekolah</a></h4>
+              <p class="description">Peserta mendaftarkan sekolahnya masing-masing. Melalui halaman registrasi sekolah
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box icon-box-cyan">
+              <div class="icon"><i class="bx bx-group"></i></div>
+              <h4 class="title"><a href="">Registrasi Peserta</a></h4>
+              <p class="description">Peserta mendaftarkan dirinya, melalui halaman registrasi peserta. Jika sekolah
+                belum terdaftar, bisa melakukan daftar sekolah terlebih dahulu.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box icon-box-green">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title"><a href="">Pembayaran</a></h4>
+              <p class="description">Peserta membayar uang kontribusi</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box icon-box-blue">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title"><a href="">Selesai</a></h4>
+              <p class="description">Setelah melakukan pembayaran, peserta sudah berhak untuk mengikuti babak
+                penyisihan.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img src="assets/img/why-us.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"
+              data-autoplay="true"></a>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
+                occaecati cupiditate non provident</p>
+            </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+              <h4 class="title"><a href="">Nemo Enim</a></h4>
+              <p class="description">asdas
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section class="features">
+      <div class="container">
+
+        <div class="section-title p-5">
+          <h2>Apa itu Mathematics Event?</h2>
+          <p>Mathematics Event adalah kompetisi matematika tahunan yang di adakan oleh Himpunan
+            Mahasiswa Matematika Fakultas Matematika dan Ilmu Pengetahuan Alam Universitas Hasanuddin (Himatika
+            FMIPA Unhas) sebagai wadah untuk membina generasi Indonesia yang kritis, kreatif, dan inovatif dengan
+            ilmu matematika. Di tahun 2021 Mathematics Event XXI kembali hadir dengan tema "Wujudkan Generasi Muda
+            Berkualitas dengan Matematika". Munculnya Covid-19, membatasi kita untuk melakukan kegiatan seperti
+            biasanya. Namun kali ini Mathematics Event tetap hadir dengan konsep yang berbeda yakni secara daring.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-md-5">
+            <img src="assets/img/features-1.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-4">
+            <h3>Tujuan</h3>
+            <ul>
+              <li><i class="icofont-check"></i> Melaksanakan tri dharma perguruan tinggi</li>
+              <li><i class="icofont-check"></i> Mewujudkan tujuan pendidikan nasional</li>
+              <li><i class="icofont-check"></i> Membina generasi indonesia yang kritis, kreatif dan inovatif dengan ilmu
+                matematika</li>
+              <li><i class="icofont-check"></i> Memperkenalkan Departemen Matematika FMIPA Unhas dan Himatika FMIPA
+                Unhas di tingkat Nasional</li>
+              <li><i class="icofont-check"></i> Mempererat tali silaturahmi antar sesama matematikawan</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-md-5 order-1 order-md-2">
+            <img src="assets/img/features-2.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-5 order-2 order-md-1">
+            <h3>Peserta</h3>
+            <ul>
+              <li><i class="icofont-check"></i> SD/Sederajat Se-Sulawesi Selatan</li>
+              <li><i class="icofont-check"></i> SMP/Sederajat Se-Indonesia</li>
+              <li><i class="icofont-check"></i> SMA/Sederajat Se-Indonesia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-md-5">
+            <img src="assets/img/features-3.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-5">
+            <h3>Tahapan</h3>
+            <p>Tahapan dalam Mathematics Event XXI terdiri dari 4 Tahap, adapun deskripsi masing masing tahap adalah
+              sebagai berikut:</p>
+            <p>1. Babak Penyisihan</p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>Untuk semua tingkatan, mengerjakan soal dalam bentuk multiple choice. Untuk lolos ke babak
+                  semifinal, jumlah peserta (n/2) atau (n + 1)/2 dari total peserta dari tiap tingkatan.</li>
+              </ul>
+            </div>
+            <p>2. Babak Semifinal</p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>Peserta yang lolos dari babak penyisihan untuk semua tingkatan mengerjakan soal dalam bentuk
+                  multiple choice. Untuk lolos ke babak selanjutnya diseleksi 30 peserta nilai tertinggi disetiap
+                  tingkatan.</li>
+              </ul>
+            </div>
+            <p>3. Babak Final</p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>
+                <li><i class="icofont-check"></i>Fast Game : Peserta (SD/Sederajat) mengerjakan soal dalam bentuk
+                  multiple choice secara tepat dan cepat. Akan diseleksi 10 peserta untuk masuk kebabak selanjutnya.
+                </li>
+                <li><i class="icofont-check"></i>Balloon Game : Soal ditempatkan pada balon virtual. Peserta
+                  (SD/Sederajat) memilih balon kemudian dipecahkan lalu mengerjakan soal. Akan diseleksi 3 peserta
+                  dengan
+                  nilai tertinggi untuk masuk ke babak Grand Final.</li>
+                <li><i class="icofont-check"></i>Theatre Game : Soal dalam bentuk video, lalu peserta (SMP dan
+                  SMA/Sederajat) mengerjakan soal. Akan diseleksi 15 peserta untuk masuk kebabak selanjutnya.</li>
+                <li><i class="icofont-check"></i>Hand Game : Tes tertulis, soal dikerjakan secara bersamaan (SMP dan
+                  SMA/Sederajat). Akan diseleksi 9 peserta untuk masuk kebabak selanjutnya.</li>
+                <li><i class="icofont-check"></i>Tender Game : Soal ditampilkan di laptop, peserta (SMP dan
+                  SMA/Sederajat)
+                  menawarkan waktu untuk mengerjakan soal. Peserta dengan tawaran waktu terendah berhak mengerjakan
+                  soal.
+                  Akan diseleksi 3 Peserta untuk masuk kebabak Grand Final.</li>
+              </ul>
+            </div>
+            <p>4. Babak Grandfinal</p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li><i class="icofont-check"></i>Tes tertulis dalam bentuk cepat tepat, untuk tingkat SD/Sederajat dan
+                  SMP/Sederajat.</li>
+                <li><i class="icofont-check"></i>Presentase, peserta mengerjakan soal lalu dipresentasikan pada tim
+                  juri, untuk tingkat
+                  SMA/Sederajat.</li>
+                <li><i class="icofont-check"></i>
+                  Matriks Game, bentuk soal tertulis. Babak ini merupakan babak rebutan. Peserta memilih soal yang
+                  ditampilkan dalam bentuk matriks dan setiap enter pada matriks tersimpan bobot nilai, untuk tingkat
+                  SMA/Sederajat.
+                </li>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-md-5 order-1 order-md-2">
+            <img src="assets/img/features-4.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1">
+            <h3>Hadiah</h3>
+            <p class="">
+              SD/Sederajat
+            </p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>Juara 1 : Piala bergilir Rektor Universitas Hasanuddin + Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 2 : Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 3 : Piala Tetap + Sertifikat + Uang Tunai</li>
+              </ul>
+            </div>
+            <p class="">
+              SMP/Sederajat
+            </p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>Juara 1 : Piala bergilir Gubernur Sulawesi Selatan + Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 2 : Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 3 : Piala Tetap + Sertifikat + Uang Tunai</li>
+              </ul>
+            </div>
+            <p class="">
+              SMA/Sederajat
+            </p>
+            <div style="padding-left: 20px;">
+              <ul>
+                <li>Juara 1 : Piala bergilir Menteri Pendidikan dan Kebudayaan + Diproriataskan masuk Universitas
+                  Hasanuddin jalur POSK + Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 2 : Piala Tetap + Sertifikat + Uang Tunai</li>
+                <li>Juara 3 : Piala Tetap + Sertifikat + Uang Tunai</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Features Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              Akidah Amaliah<br>
+              <a href="http://wa.me/6282339910744" class="text-light">
+                <strong>Phone:</strong> +62 82339910744<br><br>
+              </a>
+              Muhammad Luthfi<br>
+              <a href="http://wa.me/6282292762211" class="text-light">
+                <strong>Phone:</strong> +62 82292762211<br>
+              </a>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>About Mathematics Event XXI</h3>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+              darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com/mathevent?s=08" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://www.facebook.com/MathematicsEvent/" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://instagram.com/mathevent_xxi?igshid=hvc6yufkru0f" class="instagram"><i
+                  class="bx bxl-instagram"></i></a>
+              <a href="https://www.tiktok.com/@mathevent_xxi" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
