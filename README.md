@@ -2,7 +2,7 @@
 
 Aplikasi ini merupakan aplikasi lomba matematika pada kegiatan Mathematics Event XXI di Universitas Hasanuddin
 
-# Application Features
+## Application Features
 1. Registrasi Sekolah
 2. Registrasi Peserta
 3. Login User
@@ -11,10 +11,16 @@ Aplikasi ini merupakan aplikasi lomba matematika pada kegiatan Mathematics Event
 6. Babak Game
 7. Beberapa Halamana Lainnya
 
-# Usefull Tools
+## Usefull Tools
 [![My Skills](https://skillicons.dev/icons?i=python,js,django,html,css,mysql)](https://skillicons.dev)
 
-# Some Documentation
+## Contact
+Feel free to contact me for collaboration <br>
+[![Gmail: Muh. Nasrul](https://img.shields.io/badge/-fuadhamdi99@gmail.com-maroon?style=flat&logo=gmail)](https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqTfrDgzWPFFgSKDLmBlPGRmCRXMQVTgqZDWJrxHDMJkSBGGCGnnGJhRKjrbzjJmFqnZFg)
+[![LinkedIn](https://img.shields.io/badge/Fuad_Hamdi_Bahar-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fuad-hamdi-bahar-b11784205/)
+
+
+## Some Documentation
 Halaman Awal
 ![alt text](https://github.com/FuadHamdiBahar/Mathematics-Event-XXI/blob/main/screenshoots/dashboard.png)
 Halaman Registrasi Sekolah
