@@ -11,7 +11,7 @@ Aplikasi ini merupakan aplikasi lomba matematika pada kegiatan Mathematics Event
 6. Babak Game
 7. Beberapa Halamana Lainnya
 
-
+![alt text](https://github.com/FuadHamdiBahar/Mathematics-Event-XXI/blob/main/screenshoots/dashboard.png)
 **Fitur**
 
 *Fitur*
