@@ -1,0 +1,463 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Mathematics Event XXI</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/others_img/Logo ME XXI.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- sweetaler2 -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Moderna - v2.2.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top header-transparent">
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- <h1 class="text-light"><a href=""><span>Mathematics Event XXI</span></a></h1> -->
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <a href="{% url 'dashboards:home' %}"><img src="{% static 'assets/img/others_img/Logo ME XXI.png' %}"
+                        alt="" class="img-fluid"></a>
+            </div>
+
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="{% url 'dashboards:home' %}">Home</a></li>
+                    <li class="drop-down"><a href="">ME XXI</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:about' %}">About</a></li>
+                            <li><a href="{% url 'dashboards:jadwal' %}">Jadwal</a></li>
+                            <li><a href="{% url 'dashboards:gambaran_umum' %}">Gambaran Umum</a></li>
+                        </ul>
+                    </li>
+
+                    {% if user.is_superuser %}
+                    <li class="drop-down"><a href="">Data</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:datasd' %}">SD</a></li>
+                            <li><a href="{% url 'dashboards:datasmp' %}">SMP</a></li>
+                            <li><a href="{% url 'dashboards:datasma' %}">SMA</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li class=""><a href="{% url 'dashboards:index' user.id %}">Dashboard</a></li>
+                    <li class=""><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                    {% else %}
+                    <li class=""><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li class="drop-down"><a href="">Register</a>
+                        <ul>
+                            <li><a href="{% url 'institutions:create' %}">Sekolah</a></li>
+                            <li><a href="{% url 'accounts:create' %}">Peserta</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex justify-cntent-center align-items-center">
+        <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Mathematics Event XXI</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Mathematics Event adalah kompetisi matematika tahunan
+                        yang di adakan oleh Himpunan Mahasiswa Matematika Fakultas Matematika dan Ilmu Pengetahuan Alam
+                        Universitas Hasanuddin (Himatika FMIPA Unhas) sebagai wadah untuk membina generasi
+                        Indonesia yang kritis,kreatif dan inovatif dengan ilmu matematika. Di tahun 2021 Mathematics
+                        Event XXI kembali hadir dengan tema “ Wujudkan Generasi Muda Berkualitas dengan Matematika”.</p>
+                    <p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'dashboards:index' user.id %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Dashboard</a>
+
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Login</a>
+                        <a href="{% url 'accounts:create' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Register</a>
+
+                        {% endif %}
+
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Peserta</h2>
+                    <p class="animate__animated animate__fadeInUp">
+                        SD/Sederajat se-Sulawesi Selatan <br> SMP/Sederajat se-Indonesia <br> SMA/Sederajat se-Indonesia
+                    </p>
+                    <p>
+                        <a href="{% url 'accounts:login' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Login</a>
+                        <a href="{% url 'accounts:create' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Register</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Persiapkan diri kamu dan jadilah bagian dari
+                        Mathematics Event XXI!</h2>
+                    <p class="animate__animated animate__fadeInUp font-italic">“Semua pengetahuan lain menyakitkan bagi
+                        dia yang tidak memiliki ilmu kejujuran” <br> ~Michel de Montaign</p>
+                    <p>
+                        <a href="{% url 'accounts:login' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Login</a>
+                        <a href="{% url 'accounts:create' %}"
+                            class="btn-get-started animate__animated animate__fadeInUp">Register</a>
+                    </p>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+
+
+        <!-- ======= Services Section ======= -->
+        <section class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {% for m in messages %}
+                        <div class="alert alert-success" role="alert">
+                            {{m}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center section-title" data-aos="fade-up">
+                        <h2>Pendaftaran</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-box icon-box-green">
+                            <div class="icon"><i class="bx bxs-credit-card"></i></div>
+                            <h4 class="title"><a href="">Pembayaran</a></h4>
+                            <p class="description">Peserta membayar biaya pendaftaran melalui Nomor Rekening Bank BRI
+                                1554-01-001512-53-3 atas nama Mathematics Event</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up">
+                        <div class="icon-box icon-box-pink">
+                            <div class="icon"><i class='bx bxs-school'></i></div>
+                            <h4 class="title"><a href="">Registrasi Sekolah</a></h4>
+                            <p class="description">Peserta mendaftarkan sekolahnya masing-masing. Melalui halaman
+                                registrasi sekolah. (Registrasi sekolah hanya dilakukan sekali)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-box icon-box-cyan">
+                            <div class="icon"><i class='bx bxs-user'></i></div>
+                            <h4 class="title"><a href="">Registrasi Peserta</a></h4>
+                            <p class="description">Peserta mendaftarkan dirinya, melalui halaman registrasi peserta.
+                                Jika sekolah belum terdaftar, peserta melakukan daftar sekolah terlebih dahulu.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon-box icon-box-yellow">
+                            <div class="icon"><i class='bx bx-user-check'></i></div>
+                            <h4 class="title"><a href="">Aktivasi Akun</a></h4>
+                            <p class="description">Peserta mengirimkan bukti pendaftaran ke contact person yang tertera.
+                                Setelah itu panitia akan melakukan verifikasi selama 2 x 24 jam</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon-box icon-box-blue">
+                            <div class="icon"><i class="bx bx-world"></i></div>
+                            <h4 class="title"><a href="">Selesai</a></h4>
+                            <p class="description">Akun anda telah aktif dan anda telah terdaftar sebagai peserta
+                                Mathematics Event XXI</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center justify-content-center" data-aos="fade-up">
+                    <div class="col-md text-center">
+                        <a href="{% url 'dashboards:tutorial' %}">
+                            <p>Selengkapnya...</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+        <section class="section-bg">
+            <div class="container">
+                <div class="row mt-5 text-center">
+                    <div class="col section-title" data-aos="fade-up">
+                        <h2>Video Pendaftaran</h2>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item"
+                                src="https://www.youtube.com/embed/-1WQGDeHETg"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+        <!-- ======= Services Section ======= -->
+        <section class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center section-title" data-aos="fade-up">
+                        <h2>Kontribusi Peserta</h2>
+                        <p>
+                            1. SD/Sederajat = Rp30.000/ peserta <br> 2. SMP/Sederajat = Rp35.000/peserta <br> 3.
+                            SMA/Sederajat = Rp40.000/peserta <br>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col text-center section-title" data-aos="fade-up">
+                        <h2>Tahapan Kompetisi</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-box icon-box-green">
+                            <div class="icon"><i class="bx bxs-credit-card"></i></div>
+                            <h4 class="title"><a href="">Penyisihan</a></h4>
+                            <p class="description">Untuk semua tingkatan, mengerjakan soal dalam bentuk multiple choice.
+                                Untuk lolos ke babak semi-final, jumlah peserta (n/2) atau (n+1)/2 dari total peserta
+                                dari tiap tingkatan</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+                        <div class="icon-box icon-box-pink">
+                            <div class="icon"><i class='bx bxs-school'></i></div>
+                            <h4 class="title"><a href="">Semifinal</a></h4>
+                            <p class="description">Peserta yang lolos dari babak penyisihan untuk semua tingkatan
+                                mengerjakan soal dalam bentuk multiple choice. Untuk lolos ke babak selanjutnya
+                                diseleksi 30 peserta dengan nilai tertinggi disetiap tingkatan
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-box icon-box-cyan">
+                            <div class="icon"><i class='bx bxs-user'></i></div>
+                            <h4 class="title"><a href="">Final</a></h4>
+                            <p class="description">Babak ini terbagi menjadi beberapa tahapan. Untuk semua tingkatan
+                                mengerjakan soal dalam bentuk games. Akan diseleksi 3 peserta untuk masuk ke babak Grand
+                                Final
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+                        <div class="icon-box icon-box-yellow">
+                            <div class="icon"><i class='bx bx-user-check'></i></div>
+                            <h4 class="title"><a href="">Grand Final</a></h4>
+                            <p class="description">Babak ini adalah babak memperebutkan juara Mathematics Event XXI</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+
+        <section class="services">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 text-center section-title" data-aos="fade-up">
+                        <h2>Twibbon</h2>
+                        <img src="{% static 'assets/img/others_img/twibbun fuad.jpg' %}" alt="" class="img-fluid"
+                            data-aos="fade-up">
+                    </div>
+                </div>
+                <div class="row justify-content-center inline">
+                    <div class="col-md-6">
+                        <p class="text-center">
+                            Peserta diperbolehkan untuk menggunakan Twibbon Mathematics Event XXI dalam rangka
+                            meramaikan kegiatan Mathematics Event XXI. Peserta dapat mengunduh file twibbon <a
+                                target="_blank" rel="noopener noreferrer"
+                                href="http://bit.ly/Download_Twibbon_ME_XXI">disini</a> atau menggunakannya secara
+                            langsung <a target="_blank" rel="noopener noreferrer"
+                                href="http://bit.ly/Edit_Twibbon_Online">disini</a>. Terima Kasih.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Link</h4>
+                        <a href="{% url 'dashboards:document' %}" class="text-light">Document</a><br>
+                        <a href="{% url 'dashboards:tutorial' %}" class="text-light">Tutorial Registrasi</a><br>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            Akidah Amaliah<br>
+                            <a href="http://wa.me/6287847041796" class="text-light">
+                                <strong>Phone:</strong> +62 87847041796<br>
+                            </a>
+                            Muh.Lutfi<br>
+                            <a href="http://wa.me/6282292762211" class="text-light">
+                                <strong>Phone:</strong> +62 82292762211<br>
+                            </a>
+                            Fuad Hamdi Bahar<br>
+                            <a href="http://wa.me/6285155077645" class="text-light">
+                                <strong>Phone:</strong> +62 85155077645<br>
+                            </a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Mathematics Event XXI</h3>
+                        <p>Kegiatan ini dilaksanakan oleh Himatika FMIPA Unhas</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com/mathevent?s=08" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/MathematicsEvent/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://instagram.com/mathevent_xxi?igshid=hvc6yufkru0f" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@mathevent_xxi" class="linkedin"><i
+                                    class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <br>
+                <p>Develop by
+                    <a href="https://www.instagram.com/fu.adhmdbhr/">Fuad</a>,
+                    <a href="https://www.instagram.com/rizqul_28/">Risqull</a>,
+                    <a href="https://www.instagram.com/taufiqalifff/">Alif</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+    <!-- sweetaler2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

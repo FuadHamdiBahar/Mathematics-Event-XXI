@@ -1,0 +1,412 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Mathematics Event XXI</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/others_img/Logo ME XXI.png' %}" rel="icon" />
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!-- =======================================================
+    * Template Name: Moderna - v2.2.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container">
+            <div class="logo float-left">
+                <!-- <h1 class="text-light"><a href="index.html"><span>Mathematics Event XXI</span></a></h1> -->
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <a href="{% url 'dashboards:home' %}"><img src="{% static 'assets/img/others_img/Logo ME XXI.png' %}"
+                        alt="" class="img-fluid" /></a>
+            </div>
+
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="{% url 'dashboards:home' %}">Home</a></li>
+                    <li class="drop-down"><a href="">ME XXI</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:about' %}">About</a></li>
+                            <li><a href="{% url 'dashboards:jadwal' %}">Jadwal</a></li>
+                            <li><a href="{% url 'dashboards:gambaran_umum' %}">Gambaran Umum</a></li>
+                        </ul>
+                    </li>
+
+                    {% if user.is_superuser %}
+                    <li class="drop-down"><a href="">Data</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:datasd' %}">SD</a></li>
+                            <li><a href="{% url 'dashboards:datasmp' %}">SMP</a></li>
+                            <li><a href="{% url 'dashboards:datasma' %}">SMA</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li class=""><a href="{% url 'dashboards:index' user.id %}">Dashboard</a></li>
+                    <li class=""><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                    {% else %}
+                    <li class=""><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li class="drop-down"><a href="">Register</a>
+                        <ul>
+                            <li><a href="{% url 'institutions:create' %}">Sekolah</a></li>
+                            <li><a href="{% url 'accounts:create' %}">Peserta</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+        <!-- ======= Our Team Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Welcome to Dashboards</h2>
+                    <ol>
+                        <li><a href="{% url 'dashboards:index' user.id %}">Dashboards</a></li>
+                        <li>Profil</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <!-- End Our Team Section -->
+
+        <!-- ======= About Section ======= -->
+        <section class="about" data-aos="fade-up">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="{{peserta.foto_peserta.url}}" alt="" class="img-fluid" />
+                    </div>
+                    <div class="col-lg">
+                        <h2>Profil Peserta</h2>
+                        <hr />
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>No. ID</td>
+                                    <td>:</td>
+                                    <td>
+                                        {{peserta.no_id}} {% if peserta.no_id %}
+
+                                        <div class="badge badge-success text-wrap shadow-sm">
+                                            Aktif
+                                        </div>
+
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td>{{peserta.first_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>NISN</td>
+                                    <td>:</td>
+                                    <td>{{peserta.nisn_peserta}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>:</td>
+                                    <td>{{peserta.jenis_kelamin}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Asal Sekolah</td>
+                                    <td>:</td>
+                                    <td>{{peserta.institusi_peserta}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tingkat Pendidikan</td>
+                                    <td>:</td>
+                                    <td>{{peserta.tingkat}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kontak</td>
+                                    <td>:</td>
+                                    <td>{{peserta.kontak_peserta}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        {% if peserta.no_id == '' %}
+                        <br />
+                        <div class="alert alert-danger" role="alert">
+                            Akun anda belum diaktifkan. Silahkan mengirim bukti pembayaran ke salah satu contact person
+                            untuk mengaktifkan akun dan memperoleh No. ID!
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+        </section>
+
+        <section class="facts" data-aos="fade-up">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Mathematics Event XXI</h2>
+
+                    {% if peserta.penyisihan %}
+                    <div class="row p-5 justify-content-center">
+                        {% if peserta.penyisihan %}
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <div class="p-3">
+                                    {% if jawaban_penyisihan_sd or jawaban_penyisihan_smp or jawaban_penyisihan_sma %}
+                                    <img src="{% static 'assets/img/others_img/Done.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% else %}
+                                    <img src="{% static 'assets/img/others_img/UnDone.png' %}" class="img-fluid"
+                                        alt="..." /> {% endif %}
+                                </div>
+                                <div class="card-body" style="word-wrap: normal; ">
+                                    {% if jawaban_penyisihan_sd or jawaban_penyisihan_smp or jawaban_penyisihan_sma %}
+                                    <p>Penyisihan Selesai</p>
+                                    {% else %}
+                                    <a class="card-title text-dark"
+                                        href="{% url 'penyisihans:start' peserta.exam_code %}">Penyisihan</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if peserta.semifinal %}
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <div class="p-3">
+                                    {% if jawaban_semifinal_sd or jawaban_semifinal_smp or jawaban_semifinal_sma %}
+                                    <img src="{% static 'assets/img/others_img/Done.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% else %}
+                                    <img src="{% static 'assets/img/others_img/UnDone.png' %}" class="img-fluid"
+                                        alt="..." /> {% endif %}
+                                </div>
+                                <div class="card-body" style="word-wrap: normal;">
+                                    {% if jawaban_semifinal_sd or jawaban_semifinal_smp or jawaban_semifinal_sma %}
+                                    <p class="">Semifinal selesai</p>
+                                    {% else %}
+                                    <a class="card-title text-dark"
+                                        href="{% url 'semifinals:start' peserta.exam_code %}">Semifinal</a> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if peserta.balloongame %}
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <div class="p-3">
+                                    {% if jawaban_balloon.count > 0 %}
+                                    <img src="{% static 'assets/img/others_img/Done.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% else %}
+                                    <img src="{% static 'assets/img/others_img/UnDone.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% endif %}
+                                </div>
+                                <div class="card-body" style="word-wrap: normal;">
+                                    {% if jawaban_balloon.count > 0 %}
+                                    <p class="">Balloon Game selesai</p>
+                                    {% else %}
+                                    <a class="card-title text-dark"
+                                        href="{% url 'balloons:start' peserta.exam_code %}">Balloon Game</a> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %} {% if peserta.fastgame %}
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <div class="p-3">
+                                    {% if jawaban_fast.count > 0 %}
+                                    <img src="{% static 'assets/img/others_img/Done.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% else %}
+                                    <img src="{% static 'assets/img/others_img/UnDone.png' %}" class="img-fluid"
+                                        alt="..." /> {% endif %}
+                                </div>
+                                <div class="card-body" style="word-wrap: normal;">
+                                    {% if jawaban_fast.count > 0 %}
+                                    <p class="">Fast Game selesai</p>
+                                    {% else %}
+                                    <a class="card-title text-dark"
+                                        href="{% url 'fasts:start' peserta.exam_code %}">Fast Game</a> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if peserta.theatregame %}
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <div class="p-3">
+                                    {% if jawaban_theatre %}
+                                    <img src="{% static 'assets/img/others_img/Done.png' %}" class="img-fluid"
+                                        alt="..." />
+                                    {% else %}
+                                    <img src="{% static 'assets/img/others_img/UnDone.png' %}" class="img-fluid"
+                                        alt="..." /> {% endif %}
+                                </div>
+                                <div class="card-body" style="word-wrap: normal;">
+                                    {% if jawaban_theatre %}
+                                    <p class="">Theater Game selesai</p>
+                                    {% else %}
+                                    <a class="card-title text-dark"
+                                        href="{% url 'theaters:start' peserta.exam_code %}">Theater Game</a> {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            {% if peserta.playoff %}
+                            <div class="alert alert-warning" role="alert">
+                                <a href="{% url 'playoffs:start_playoff' peserta.exam_code %}"
+                                    class="text-dark">Playoff</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End About Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Link</h4>
+                        <a href="{% url 'dashboards:document' %}" class="text-light">Document</a><br>
+                        <a href="{% url 'dashboards:tutorial' %}" class="text-light">Tutorial Registrasi</a><br>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            Akidah Amaliah<br>
+                            <a href="http://wa.me/6287847041796" class="text-light">
+                                <strong>Phone:</strong> +62 87847041796<br>
+                            </a>
+                            Muh.Lutfi<br>
+                            <a href="http://wa.me/6282292762211" class="text-light">
+                                <strong>Phone:</strong> +62 82292762211<br>
+                            </a>
+                            Fuad Hamdi Bahar<br>
+                            <a href="http://wa.me/6285155077645" class="text-light">
+                                <strong>Phone:</strong> +62 85155077645<br>
+                            </a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Mathematics Event XXI</h3>
+                        <p>Kegiatan ini dilaksanakan oleh Himatika FMIPA Unhas</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com/mathevent?s=08" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/MathematicsEvent/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://instagram.com/mathevent_xxi?igshid=hvc6yufkru0f" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@mathevent_xxi" class="linkedin"><i
+                                    class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <br>
+                <p>Develop by
+                    <a href="https://www.instagram.com/fu.adhmdbhr/">Fuad</a>,
+                    <a href="https://www.instagram.com/rizqul_28/">Risqull</a>,
+                    <a href="https://www.instagram.com/taufiqalifff/">Alif</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

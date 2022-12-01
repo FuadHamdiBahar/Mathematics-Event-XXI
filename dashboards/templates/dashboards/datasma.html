@@ -1,0 +1,421 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Mathematics Event XXI</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/others_img/Logo ME XXI.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna - v2.2.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- <h1 class="text-light"><a href="index.html"><span>Mathematics Event XXI</span></a></h1> -->
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <a href="{% url 'dashboards:home' %}"><img src="{% static 'assets/img/others_img/Logo ME XXI.png' %}"
+                        alt="" class="img-fluid"></a>
+            </div>
+
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="{% url 'dashboards:home' %}">Home</a></li>
+                    <li class="drop-down"><a href="">ME XXI</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:about' %}">About</a></li>
+                            <li><a href="{% url 'dashboards:jadwal' %}">Jadwal</a></li>
+                            <li><a href="{% url 'dashboards:gambaran_umum' %}">Gambaran Umum</a></li>
+                        </ul>
+                    </li>
+
+                    {% if user.is_superuser %}
+                    <li class="drop-down"><a href="">Data</a>
+                        <ul>
+                            <li><a href="{% url 'dashboards:datasd' %}">SD</a></li>
+                            <li><a href="{% url 'dashboards:datasmp' %}">SMP</a></li>
+                            <li><a href="{% url 'dashboards:datasma' %}">SMA</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li class=""><a href="{% url 'dashboards:index' user.id %}">Dashboard</a></li>
+                    <li class=""><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                    {% else %}
+                    <li class=""><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li class="drop-down"><a href="">Register</a>
+                        <ul>
+                            <li><a href="{% url 'institutions:create' %}">Sekolah</a></li>
+                            <li><a href="{% url 'accounts:create' %}">Peserta</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Our Team Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Dokumen</h2>
+                    <ol>
+                        <li><a href="{% url 'dashboards:home' %}">Dashboards</a></li>
+                        <li>Dokumen</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Our Team Section -->
+
+        <!-- ======= About Section ======= -->
+        <section class="about" data-aos="fade-up">
+            <div class="container">
+                <div class="container">
+
+
+                    {% for i in peserta_simulasi %}
+                    {{i.first_name}} <br>
+                    {% endfor %}
+
+                    <!-- Data Paricipants -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">SMA</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{peserta.count}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- end Data Participants -->
+                </div>
+
+                <div class="container">
+                    <h1>Peserta</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID Peserta</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Login?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for j in peserta %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{j.no_id}}</td>
+                                <td>{{j.first_name}}</td>
+                                <td>{{j.is_login}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="container">
+                    <!-- Data SMP -->
+                    <h1>SMA</h1>
+                    <h5>Penyisihan</h5>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Nama Sekolah</th>
+                                        <th scope="col">Jawaban</th>
+                                        <th scope="col">Benar</th>
+                                        <th scope="col">Salah</th>
+                                        <th scope="col">Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for j in penyisihan %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{j.nama_peserta}}</td>
+                                        <td>{{j.jawaban_peserta}}</td>
+                                        <td>{{j.institusi_peserta}}</td>
+                                        <td>{{j.jawaban_benar}}</td>
+                                        <td>{{j.jawaban_salah}}</td>
+                                        <td>{{j.result_peserta}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h5>Playoff Penyisihan</h5>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Jawaban</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for j in playoff_penyisihan %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{j.nama_peserta}}</td>
+                                        <td>{{j.jawaban}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h5>Semifinal</h5>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Nama Sekolah</th>
+                                        <th scope="col">Jawaban</th>
+                                        <th scope="col">Benar</th>
+                                        <th scope="col">Salah</th>
+                                        <th scope="col">Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for j in semifinal %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{j.nama_peserta}}</td>
+                                        <td>{{j.institusi_peserta}}</td>
+                                        <td>{{j.jawaban_peserta}}</td>
+                                        <td>{{j.jawaban_benar}}</td>
+                                        <td>{{j.jawaban_salah}}</td>
+                                        <td>{{j.result_peserta}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h5>Playoff Penyisihan</h5>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Jawaban</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for j in playoff_semifinal %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{j.nama_peserta}}</td>
+                                        <td>{{j.jawaban}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h5>Theatre</h5>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Jawaban</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for j in theater %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{j.nama_peserta}}</td>
+                                        <td>{{j.jawaban}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end Data SMP -->
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- End About Section -->
+
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Link</h4>
+                        <a href="{% url 'dashboards:document' %}" class="text-light">Document</a><br>
+                        <a href="{% url 'dashboards:tutorial' %}" class="text-light">Tutorial Registrasi</a><br>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            Akidah Amaliah<br>
+                            <a href="http://wa.me/6287847041796" class="text-light">
+                                <strong>Phone:</strong> +62 87847041796<br>
+                            </a>
+                            Muh.Lutfi<br>
+                            <a href="http://wa.me/6282292762211" class="text-light">
+                                <strong>Phone:</strong> +62 82292762211<br>
+                            </a>
+                            Fuad Hamdi Bahar<br>
+                            <a href="http://wa.me/6285155077645" class="text-light">
+                                <strong>Phone:</strong> +62 85155077645<br>
+                            </a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Mathematics Event XXI</h3>
+                        <p>Kegiatan ini dilaksanakan oleh Himatika FMIPA Unhas</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com/mathevent?s=08" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/MathematicsEvent/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://instagram.com/mathevent_xxi?igshid=hvc6yufkru0f" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@mathevent_xxi" class="linkedin"><i
+                                    class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <br>
+                <p>Develop by
+                    <a href="https://www.instagram.com/fu.adhmdbhr/">Fuad</a>,
+                    <a href="https://www.instagram.com/rizqul_28/">Risqull</a>,
+                    <a href="https://www.instagram.com/taufiqalifff/">Alif</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
+    <script>
+        const data = JSON.parse("{{data|escapejs}}")
+        for (i in data) {
+            console.log(data[i].fields)
+        }
+    </script>
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+
+</body>
+
+</html>

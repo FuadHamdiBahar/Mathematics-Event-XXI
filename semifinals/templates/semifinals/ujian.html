@@ -1,0 +1,374 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Mathematics Event XXI</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/others_img/Logo ME XXI.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- w3css -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna - v2.2.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- <h1 class="text-light"><a href="index.html"><span>Mathematics Event XXI</span></a></h1> -->
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <a href="{% url 'dashboards:home' %}"><img src="{% static 'assets/img/others_img/Logo ME XXI.png' %}" alt="" class="img-fluid"></a>
+            </div>
+
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="{% url 'dashboards:home' %}">Home</a></li>
+
+                    {% if user.is_authenticated %}
+                    <li class=""><a href="{% url 'dashboards:index' user.id %}">{{user.first_name}}</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            <!-- .nav-menu -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Our Team Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Semifinal</h2>
+                    <ol>
+                        <li><a href="{% url 'dashboards:index' user.id %}">Dashboards</a></li>
+                        <li>Semifinal</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Our Team Section -->
+
+        <!-- ======= About Section ======= -->
+        <section class="about" data-aos="fade-up">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col">
+                        <div id="showtime" class="alert alert-primary" role="alert">
+                            Ujian berakhir : {{event.end_time|date:"M d, Y H:i:s"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row  text-center">
+                    <div class="col">
+                        <div id="countdown" class="alert alert-danger" role="alert">
+                            <h1><b>Sisa waktu:</b></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div id="angka" class="col-md-10">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="soalbox">
+                                    <h1>Soal</h1>
+                                </div>
+                                <div class="ml-2 mt-2">
+                                    <button class="btn btn-light" onclick="checkedA()">A</button>
+                                    <button class="btn btn-light" onclick="checkedB()">B</button>
+                                    <button class="btn btn-light" onclick="checkedC()">C</button>
+                                    <button class="btn btn-light" onclick="checkedD()">D</button>
+                                    <button class="btn btn-light" onclick="checkedE()">E</button>
+                                    <button class="btn btn-danger" onclick="del()">Hapus</button>
+                                </div>
+                                <br>
+                                <div class="ml-2">
+                                    <button id="prev" onclick="previous()" class="btn btn-secondary">
+                                        Soal sebelumnya</button>
+                                    <button id="next" onclick="next()" class="btn btn-secondary">Soal selanjutnya
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sticky-top">
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Jawaban</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="form_ujian" action="" method="post">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                {% for s in soal %}
+                                                <div class="col-md-4">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">{{s.no_soal}}</span>
+                                                        <input type="text" class="form-control" name="{{s.no_soal}}" id="{{s.no_soal}}" readonly>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+
+                                            <input type="submit" class="btn btn-success btn-lg btn-block" onclick="return confirm('Apakah anda yakin ingin mengakhiri ujian?')" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End About Section -->
+
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Link</h4>
+                        <a href="{% url 'dashboards:document' %}" class="text-light">Document</a><br>
+                        <a href="{% url 'dashboards:tutorial' %}" class="text-light">Tutorial Registrasi</a><br>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            Akidah Amaliah<br>
+                            <a href="http://wa.me/6287847041796" class="text-light">
+                                <strong>Phone:</strong> +62 87847041796<br>
+                            </a>
+                            Muh.Lutfi<br>
+                            <a href="http://wa.me/6282292762211" class="text-light">
+                                <strong>Phone:</strong> +62 82292762211<br>
+                            </a>
+                            Fuad Hamdi Bahar<br>
+                            <a href="http://wa.me/6285155077645" class="text-light">
+                                <strong>Phone:</strong> +62 85155077645<br>
+                            </a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Mathematics Event XXI</h3>
+                        <p>Kegiatan ini dilaksanakan oleh Himatika FMIPA Unhas</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com/mathevent?s=08" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/MathematicsEvent/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://instagram.com/mathevent_xxi?igshid=hvc6yufkru0f" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@mathevent_xxi" class="linkedin"><i
+                                    class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <br>
+                <p>Develop by Fuad, Risqull, Alif</p>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script>
+        const a = JSON.parse("{{data|escapejs}}")
+        const soal = document.getElementById('soalbox')
+        const angka = document.getElementById('angka')
+
+        var id_soal = 0
+
+        function show(id_soal) {
+            angka.innerHTML = "<p>Soal " + (id_soal + 1) + "/15 </p>"
+            soal.innerHTML = "<img src=\"/media/" + a[id_soal].fields.foto_soal + "\" class=\"img-fluid\">";
+        }
+
+        show(id_soal)
+
+        function previous() {
+            if (id_soal > 0) {
+                id_soal -= 1;
+                show(id_soal);
+                console.log("Prev");
+            }
+        }
+        checkedE
+
+        function next() {
+            if (id_soal < 14) {
+                id_soal += 1;
+                show(id_soal);
+                console.log("Next");
+            }
+        }
+
+        function checkedA() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "A";
+        }
+
+        function checkedB() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "B";
+        }
+
+        function checkedC() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "C";
+        }
+
+        function checkedD() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "D";
+        }
+
+        function checkedE() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "E";
+        }
+
+        function del() {
+            var jawaban = document.getElementById(String(id_soal + 1));
+            jawaban.value = "";
+        }
+
+
+        // Mengatur waktu akhir perhitungan mundur
+        const starttime = document.getElementById('showtime')
+        var countDownDate = Date.parse(starttime.textContent)
+
+        // Memperbarui hitungan mundur setiap 1 detik
+        var x = setInterval(function() {
+
+            // Untuk mendapatkan tanggal dan waktu hari ini
+            var now = new Date();
+
+            // konversi ke waktu makassar
+            wita = convertTZ(now, "Asia/Makassar")
+            console.log(wita);
+            real_time = new Date(wita)
+
+            // Temukan jarak antara sekarang dan tanggal hitung mundur
+            var distance = countDownDate - real_time;
+
+            // Perhitungan waktu untuk hari, jam, menit dan detik
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Keluarkan hasil dalam elemen dengan id = "demo"
+            document.getElementById("countdown").innerHTML = "<h1><b>Sisa waktu: " + minutes + " menit " + seconds + " detik </b></h1>";
+
+            // Jika hitungan mundur selesai, tulis beberapa teks
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("form_ujian").submit();
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+        function convertTZ(date, tzString) {
+            return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {
+                timeZone: tzString
+            }));
+        }
+    </script>
+
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+
+</body>
+
+</html>
