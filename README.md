@@ -12,11 +12,11 @@ Aplikasi ini merupakan aplikasi lomba matematika pada kegiatan Mathematics Event
 7. Beberapa Halamana Lainnya
 
 ## Usefull Tools
-[![My Skills](https://skillicons.dev/icons?i=python,js,django,html,css,mysql)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=python,js,django,html,css,mysql,jquery)](https://skillicons.dev)
 
 ## Contact
 Feel free to contact me for collaboration <br>
-[![Gmail: Muh. Nasrul](https://img.shields.io/badge/-fuadhamdi99@gmail.com-maroon?style=flat&logo=gmail)](https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqTfrDgzWPFFgSKDLmBlPGRmCRXMQVTgqZDWJrxHDMJkSBGGCGnnGJhRKjrbzjJmFqnZFg)
+[![Gmail: Fuad Hamdi Bahar](https://img.shields.io/badge/-fuadhamdi99@gmail.com-maroon?style=flat&logo=gmail)](https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqTfrDgzWPFFgSKDLmBlPGRmCRXMQVTgqZDWJrxHDMJkSBGGCGnnGJhRKjrbzjJmFqnZFg)
 [![LinkedIn](https://img.shields.io/badge/Fuad_Hamdi_Bahar-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fuad-hamdi-bahar-b11784205/)
 
 
